@@ -11,12 +11,11 @@ package com.walkwind.spring5;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
-@Aspect //生成代理对象
-@Order(1)
+//@Aspect //生成代理对象
+//@Order(1)
 public class UserProxy {
     //@Before 注解表示作为前置通知
     @Before(value = "execution(* com.walkwind.spring5.User.add(..))")
