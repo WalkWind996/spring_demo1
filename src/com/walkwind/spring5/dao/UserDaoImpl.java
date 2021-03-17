@@ -18,8 +18,19 @@ import java.util.List;
 public class UserDaoImpl implements UserDao{
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Override
+    public void addMoney() {
+        jdbcTemplate.update("update user set money = ? where id  = ?",1100,1);
+    }
+    @Override
+    public void subMoney() {
+        jdbcTemplate.update("update user set money = ? where id  = ?",900,2);
+    }
     @Override
     public void addUser(List<Object[]> list) {
         jdbcTemplate.batchUpdate("insert into user (id,name,age)values(?,?,?)",list);
     }
+
+
 }

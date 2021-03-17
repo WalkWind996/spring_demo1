@@ -12,5 +12,10 @@ import java.util.List;
  * @Create: 2021-03-16 20:30
  **/
 public interface UserDao {
-    public void addUser(List<Object[]> list);
+    void addMoney();
+
+    void subMoney();
+
+    void addUser(List<Object[]> list);
+
 }

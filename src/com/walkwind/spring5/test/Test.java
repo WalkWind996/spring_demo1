@@ -15,6 +15,13 @@ public class Test {
 
 
     @org.junit.Test
+    public void Test1() throws Exception {
+        ApplicationContext application =   new ClassPathXmlApplicationContext("application.xml");
+        UserService userService = application.getBean("userServiceImpl", UserServiceImpl.class);
+        userService.transferAccount();
+    }
+
+    @org.junit.Test
     public void userAdd(){
         ApplicationContext application =   new ClassPathXmlApplicationContext("application.xml");
         UserService userService = application.getBean("userServiceImpl", UserServiceImpl.class);

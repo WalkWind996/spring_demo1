@@ -3,6 +3,7 @@ package com.walkwind.spring5.servcie;
 import com.walkwind.spring5.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,16 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserDao userDao;
+
+    @Override
+    @Transactional()
+    public void transferAccount() throws Exception {
+        userDao.addMoney();
+        int i = 1 / 0;  //手动创造异常
+        userDao.subMoney();
+    }
+
+
     @Override
     public void addUser(List<Object[]> list) {
         userDao.addUser(list);
