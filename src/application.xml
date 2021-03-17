@@ -15,7 +15,17 @@
     </bean>
     <!--开启事务注解-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
-
+    <!--配置通知-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--配置事务应用到哪些规则的方法上-->
+            <tx:method name="transfer*" isolation="REPEATABLE_READ"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="txPoint" expression="execution(* com.walkwind.spring5.servcie.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPoint"/>
+    </aop:config>
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="url" value="${db.url}"/>
         <property name="driverClassName" value="${db.driverClassName}"/>
@@ -30,13 +40,9 @@
     <!--引入外部properties文件-->
     <context:property-placeholder location="classpath:db.properties"/>
 
-    <!-- 开启 Aspect 生成代理对象-->
-<!--    <aop:aspectj-autoproxy/>-->
-
-
     <bean id="user" class="com.walkwind.spring5.entity.User"/>
     <bean id="userProxy" class="com.walkwind.spring5.UserProxy"/>
-    <aop:config>
+<!--    <aop:config>
         <aop:pointcut id="userPC" expression="execution(* com.walkwind.spring5.entity.User.*(..))"/>
         <aop:aspect ref="userProxy">
             <aop:before method="before" pointcut-ref="userPC"/>
@@ -45,6 +51,11 @@
             <aop:after-throwing method="afterThrowing" pointcut-ref="userPC"/>
             <aop:after-returning method="afterReturning" pointcut-ref="userPC"/>
         </aop:aspect>
-    </aop:config>
+    </aop:config>-->
+
+    <!-- 开启 Aspect 生成代理对象-->
+    <!--    <aop:aspectj-autoproxy/>-->
+
+
 
 </beans>

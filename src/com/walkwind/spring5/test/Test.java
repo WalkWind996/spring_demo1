@@ -1,6 +1,7 @@
 package com.walkwind.spring5.test;
 
 import com.walkwind.spring5.ConfigAop;
+import com.walkwind.spring5.config.TxConfig;
 import com.walkwind.spring5.entity.User;
 import com.walkwind.spring5.servcie.UserService;
 import com.walkwind.spring5.servcie.UserServiceImpl;
@@ -13,6 +14,13 @@ import java.util.List;
 
 public class Test {
 
+
+    @org.junit.Test
+    public void Test2() throws Exception {
+        ApplicationContext application =   new AnnotationConfigApplicationContext(TxConfig.class);
+        UserService userService = application.getBean("userServiceImpl", UserServiceImpl.class);
+        userService.transferAccount();
+    }
 
     @org.junit.Test
     public void Test1() throws Exception {
